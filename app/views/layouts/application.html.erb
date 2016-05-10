@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dittolabsinterview</title>
+  <title>DL Interview - KRM</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container <%= yield :body_class %>" id="<%= yield :body_id %>">
+  <%= yield %>
+</div>
 
 </body>
 </html>
