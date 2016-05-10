@@ -1,2 +1,6 @@
 $('document').ready ->
-  $('#masonry-container').masonry()
+  $('#masonry-container').isotope({
+    layout: 'fitRows',
+    itemSelector: '.grid-item',
+    percentPosition: true
+  })
