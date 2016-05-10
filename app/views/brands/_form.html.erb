@@ -1,4 +1,4 @@
-<%= form_for(@brand) do |f| %>
+<%= form_for(@brand, layout: :basic) do |f| %>
   <% if @brand.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@brand.errors.count, "error") %> prohibited this brand from being saved:</h2>
@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= f.text_field :name %>
   <div class="actions">
     <%= f.submit %>
   </div>
