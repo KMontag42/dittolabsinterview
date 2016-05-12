@@ -1,9 +1,12 @@
-<h1>Images for <%= @brand.name %></h1>
+<h1>
+  Images for <%= @brand.name.titleize %>
+  <%= link_to 'Back', brands_path, class: 'pull-right btn btn-primary' %>
+</h1>
+<div class="clearfix"></div>
 
-<%= link_to 'Back', brands_path %>
-
+<%= paginate @paged_images %>
 <div id="masonry-container" class="transitions-enabled">
-  <% @brand.images.each do |image| %>
+  <% @paged_images.each do |image| %>
   <div class="grid-item">
     <img src="<%= image.source %>"/>
   </div>

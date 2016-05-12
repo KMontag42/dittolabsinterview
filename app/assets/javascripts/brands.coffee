@@ -25,5 +25,9 @@ $('document').ready ->
         name: 'name'
         type: 'text'
       }
+      {
+        name: 'image_count'
+        type: 'number'
+      }
     ]
   })

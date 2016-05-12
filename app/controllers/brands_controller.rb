@@ -17,6 +17,7 @@ class BrandsController < ApplicationController
   # GET /brands/1
   # GET /brands/1.json
   def show
+    @paged_images = @brand.images.page(params[:page] || 1).per(params[:per] || 25)
   end
 
   # GET /brands/new
