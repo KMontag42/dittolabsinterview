@@ -1,5 +1,7 @@
 <h1>Images for <%= @brand.name %></h1>
 
+<%= link_to 'Back', brands_path %>
+
 <div id="masonry-container" class="transitions-enabled">
   <% @brand.images.each do |image| %>
   <div class="grid-item">
@@ -8,5 +10,3 @@
   <% end %>
 </div>
 <div class="clearfix"></div>
-
-<%= link_to 'Back', brands_path %>
