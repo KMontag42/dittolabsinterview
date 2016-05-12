@@ -4,10 +4,14 @@
 </h1>
 <div class="clearfix"></div>
 
+<%= link_to 'HQ Matches', '?quality=High', class: 'btn btn-primary' %>
+<%= link_to 'Most Popular', '?popular=true', class: 'btn btn-primary' %>
+<%= link_to 'Least Popular', '?popular=false', class: 'btn btn-primary' %>
+<br>
 <%= paginate @paged_images %>
 <div id="masonry-container" class="transitions-enabled">
   <% @paged_images.each do |image| %>
-  <div class="grid-item">
+  <div class="grid-item <%= image.brand_images.first.match_quality.gsub(/ /, '') %>">
     <img src="<%= image.source %>"/>
   </div>
   <% end %>

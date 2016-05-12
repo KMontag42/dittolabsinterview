@@ -17,7 +17,19 @@ class BrandsController < ApplicationController
   # GET /brands/1
   # GET /brands/1.json
   def show
-    @paged_images = @brand.images.page(params[:page] || 1).per(params[:per] || 25)
+    @images = @brand.images.includes(:brand_images)
+    unless params[:quality].blank?
+      @images = @images.where(brand_images: {match_quality: params[:quality]})
+    end
+    unless params[:popular].blank?
+      popular = params[:popular] == 'true'
+      if popular
+        @images = @images.order('favorite_count DESC')
+      else
+        @images = @images.order('favorite_count ASC')
+      end
+    end
+    @paged_images = @images.page(params[:page] || 1).per(params[:per] || 25)
   end
 
   # GET /brands/new
