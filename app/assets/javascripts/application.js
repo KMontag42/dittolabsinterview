@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require isotope/jquery.isotope
+//= require jsgrid.min
 //= require_tree .

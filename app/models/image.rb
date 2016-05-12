@@ -11,4 +11,5 @@
 
 class Image < ActiveRecord::Base
   has_many :brand_images
+  has_many :brands, through: :brand_images
 end

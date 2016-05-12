@@ -10,4 +10,5 @@
 
 class Brand < ActiveRecord::Base
   has_many :brand_images
+  has_many :images, through: :brand_images
 end

@@ -4,7 +4,14 @@ class BrandsController < ApplicationController
   # GET /brands
   # GET /brands.json
   def index
-    @brands = Brand.all
+    # we only need the actual query to run via AJAX,
+    # so no need to run it on page load
+    respond_to do |format|
+      format.html
+      format.json {
+        @brands = Brand.all
+      }
+    end
   end
 
   # GET /brands/1
