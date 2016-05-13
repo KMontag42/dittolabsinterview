@@ -31,3 +31,26 @@ $('document').ready ->
       }
     ]
   })
+
+  $('#neighbor-brands').jsGrid({
+    height: 'auto',
+    width: '100%',
+    sorting: true,
+    paging: true,
+    autoload: true,
+    controller: {
+      loadData: () ->
+        $.ajax
+          url: "/brands/#{$('#neighbor-brands').data('brand-id')}.json?neighbors=1"
+          dataType: 'json'
+    },
+    rowClick: (args) ->
+      window.location = args.item.url
+    ,
+    fields: [
+      {
+        name: 'name'
+        type: 'text'
+      }
+    ]
+  })

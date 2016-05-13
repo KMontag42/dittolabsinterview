@@ -1,0 +1,6 @@
+<h1>
+  Brands Related to <%= @brand.name.titleize %>
+  <%= link_to 'Back', brand_path(@brand), class: 'pull-right btn btn-primary' %>
+</h1>
+
+<div id="neighbor-brands" data-brand-id="<%= @brand.id %>"></div>

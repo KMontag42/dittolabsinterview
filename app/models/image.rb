@@ -7,6 +7,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  favorite_count :integer
+#  date_posted    :datetime
 #
 
 class Image < ActiveRecord::Base

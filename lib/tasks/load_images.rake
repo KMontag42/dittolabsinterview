@@ -13,17 +13,18 @@ namespace :load do
       line_data.each do |line|
         line_json = JSON.parse(line)
         line_image = Image.create({
-                                      source: line_json['matches']['url'],
-                                      favorite_count: line_json['post']['likes']['count']
-                                  })
+          source: line_json['matches']['url'],
+          favorite_count: line_json['post']['likes']['count'],
+          date_posted: DateTime.strptime(line_json['post']['created_time'],'%s')
+        })
         line_brands = line_json['matches']['data']['matches']
         line_brands.each do |lb|
           brand = Brand.find_or_create_by(name: lb['brand'])
           match = BrandImage.create({
-                                        image_id: line_image.id,
-                                        brand_id: brand.id,
-                                        match_quality: lb['match_quality']
-                                    })
+            image_id: line_image.id,
+            brand_id: brand.id,
+            match_quality: lb['match_quality']
+          })
         end
       end
     end

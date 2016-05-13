@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  before_action :set_brand, only: [:show, :neighbors, :edit, :update, :destroy]
 
   # GET /brands
   # GET /brands.json
@@ -17,19 +17,39 @@ class BrandsController < ApplicationController
   # GET /brands/1
   # GET /brands/1.json
   def show
-    @images = @brand.images.includes(:brand_images)
-    unless params[:quality].blank?
-      @images = @images.where(brand_images: {match_quality: params[:quality]})
-    end
-    unless params[:popular].blank?
-      popular = params[:popular] == 'true'
-      if popular
-        @images = @images.order('favorite_count DESC')
-      else
-        @images = @images.order('favorite_count ASC')
+    if params[:neighbors].blank?
+      @images = @brand.images.includes(:brand_images)
+      unless params[:quality].blank?
+        @images = @images.where(brand_images: {match_quality: params[:quality]})
+      end
+      unless params[:popular].blank?
+        popular = params[:popular] == 'true'
+        if popular
+          @images = @images.order('favorite_count DESC')
+        else
+          @images = @images.order('favorite_count ASC')
+        end
+      end
+      unless params[:recent].blank?
+        recent = params[:recent] == 'true'
+        if recent
+          @images = @images.order('date_posted DESC')
+        else
+          @images = @images.order('date_posted ASC')
+        end
+      end
+      @paged_images = @images.page(params[:page] || 1).per(params[:per] || 25)
+    else
+      respond_to do |format|
+        format.html {
+          render 'neighbors'
+        }
+        format.json {
+          @neighbors = @brand.neighbor_brands
+          render 'neighbors'
+        }
       end
     end
-    @paged_images = @images.page(params[:page] || 1).per(params[:per] || 25)
   end
 
   # GET /brands/new
